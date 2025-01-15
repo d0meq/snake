@@ -8,7 +8,7 @@ screen_width = 600
 screen_height = 400
 
 screen = pygame.display.set_mode((screen_width,screen_height))
-pygame.display.set_caption('Snake Game by Dominik')
+pygame.display.set_caption('Snake Game')
 
 blue = (0,0,255)
 red = (255,0,0)
@@ -30,8 +30,8 @@ score_font = pygame.font.SysFont("comicsansms", 15)
 def settings():
     settings_over = False
 
-    screen.fill(black)
-    settings_message("2 - Blue 1 - Red", orange)
+    screen.fill(green)
+    settings_message("2 - Blue 1 - Red", white)
     pygame.display.update()
 
     while not settings_over:
@@ -47,8 +47,8 @@ def settings():
 def menu():
     menu_over = False
 
-    screen.fill(black)
-    continue_message("2 - change color 1 - Play 0 - Quit", orange)
+    screen.fill(green)
+    continue_message("2 - change color 1 - Play 0 - Quit", white)
     pygame.display.update()
 
     while not menu_over:
@@ -64,7 +64,7 @@ def menu():
                 
 
 def score(score):
-    value = score_font.render("Your score: "+ str(score), True, orange)
+    value = score_font.render("Your score: "+ str(score), True, white)
     screen.blit(value, [10,0])
 
 def snake(snake_block, snake_list):
@@ -103,13 +103,13 @@ def gameLoop():
     while not over:
 
         while close == True:
-            screen.fill(black)
-            message("You Lost! Press Q-Quit or C-Play Again", orange)
+            screen.fill(green)
+            message("You Lost! Press 0-Quit or C-Play Again", orange)
             pygame.display.update()
 
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_q:
+                    if event.key == pygame.K_0:
                         over = True
                         close = False
                     if event.key == pygame.K_c:
@@ -140,9 +140,9 @@ def gameLoop():
         x1 += x1_change
         y1 += y1_change
 
-        screen.fill(black)
+        screen.fill(green)
         
-        pygame.draw.rect(screen, orange, [foodX, foodY, snake_block, snake_block])
+        pygame.draw.rect(screen, red, [foodX, foodY, snake_block, snake_block])
 
         snake_head = []
         snake_head.append(x1)
