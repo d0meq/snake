@@ -9,16 +9,17 @@ snake_size = 10
 
 # Screen settings
 screen_width = 300
-screen_heigt = 300
-screen = pygame.display.set_mode((screen_width,screen_heigt))
+screen_height = 300
+bg_image = pygame.image.load('background.jpg')
+bg_image2 = pygame.image.load('sky.jpg')
+screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Snake Game')
 
-def message(input, positionX, positionY, size):
+def message(input, positionX, positionY, size, color):
     font_style = pygame.font.SysFont("bahnschrift", size)
-    msg = font_style.render(input, True, (255,255,255))
-    screen.blit(msg, [positionX, positionY])    
+    msg = font_style.render(input, True, color)
+    screen.blit(msg, [positionX, positionY])
 
-# Classes of objects
 class Snake:
     def __init__(self, x, y):
         self.x = x
@@ -31,7 +32,7 @@ class Snake:
 
     def grow(self):
         self.body.append(self.body[-1])
-        
+
 class Food:
     def __init__(self, fx, fy, radius):
         self.fx = fx
@@ -39,20 +40,19 @@ class Food:
         self.radius = radius
 
 def drawSnake(snake, food):
-    screen.fill((0, 0, 0))  # Clear the screen before drawing
-    pygame.draw.circle(screen, (255, 255, 255), (food.fx, food.fy), food.radius)  # Draw the food
+    screen.blit(bg_image, (0, 0))  # Draw the background image first
+    pygame.draw.circle(screen, (255, 0, 255), (food.fx, food.fy), food.radius)  # Draw the food
     for segment in snake.body:
-        pygame.draw.rect(screen, (255, 255, 255), (segment[0], segment[1], snake_size, snake_size))
-
+        pygame.draw.circle(screen, (255, 0, 0), (segment[0], segment[1]), food.radius)
 
 def mainMenu():
     menu_over = False
 
-    screen.fill((0,0,0))
-    message("Press 1 to play a game !", 0.15*screen_width, 0.4*screen_heigt, 20)
-    message("Press 2 to open settings !", 0.15*screen_width, 0.5*screen_heigt, 20)
+    screen.blit(bg_image2, (0,0))
+    message("Press 1 to play a game!", 0.15 * screen_width, 0.4 * screen_height, 20, (0,0,0))
+    message("Press 2 to open settings!", 0.15 * screen_width, 0.5 * screen_height, 20, (0,0,0))
     pygame.display.update()
-    
+
     while not menu_over:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -68,11 +68,11 @@ def mainMenu():
 def settings():
     settings_over = False
     
-    screen.fill((0,0,0))
-    message("Press 1 to chose red !", 0.15*screen_width, 0.4*screen_heigt, 20)
-    message("Press 2 to chose blue !", 0.15*screen_width, 0.5*screen_heigt, 20)
+    screen.blit(bg_image2, (0,0))
+    message("Press 1 to choose red!", 0.15 * screen_width, 0.4 * screen_height, 20, (0,0,0))
+    message("Press 2 to choose blue!", 0.15 * screen_width, 0.5 * screen_height, 20, (0,0,0))
     pygame.display.update()
-    
+
     while not settings_over:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -87,10 +87,10 @@ def game():
     score = 0
     game_over = False
 
-    snake = Snake(screen_heigt / 2, screen_width / 2)
+    snake = Snake(screen_height / 2, screen_width / 2)
     dx, dy = 0, 0
 
-    food = Food(random.randint(0, screen_width - 10), random.randint(0, screen_heigt - 10), 5)
+    food = Food(random.randint(0, screen_width - 10), random.randint(0, screen_height - 10), 5)
 
     while not game_over:
         for event in pygame.event.get():
@@ -108,21 +108,20 @@ def game():
 
         snake.move(dx, dy)
 
-        if snake.body[0][0] < 0 or snake.body[0][0] >= screen_width or snake.body[0][1] < 0 or snake.body[0][1] >= screen_heigt:
+        if snake.body[0][0] < 0 or snake.body[0][0] >= screen_width or snake.body[0][1] < 0 or snake.body[0][1] >= screen_height:
             pygame.quit()
             game_over = True
-        
-        # Adjust collision detection logic
+
         if abs(snake.body[0][0] - food.fx) < snake_size and abs(snake.body[0][1] - food.fy) < snake_size:
             snake.grow()
-            food = Food(random.randint(0, screen_width - 10), random.randint(0, screen_heigt - 10), 5)
+            food = Food(random.randint(0, screen_width - 10), random.randint(0, screen_height - 10), 5)
             score += 1
-        
+
         drawSnake(snake, food)
-        message("Your score: "+ str(score) , 0.05*screen_width, 0.05*screen_heigt, 15)
+        message("Your score: " + str(score), 0.05 * screen_width, 0.05 * screen_height, 15, (255,255,255))
         pygame.display.update()
-        time.sleep(0.1)
+        time.sleep(0.08)
+
     pygame.quit()
 
 mainMenu()
-game()

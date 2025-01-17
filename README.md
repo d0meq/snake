@@ -1,36 +1,36 @@
 # Snake Game
 
-This is a simple Snake game implemented using Pygame.
+This is a simple Snake game implemented using Python and Pygame.
 
-## How to Play
+## Requirements
 
-- Use the arrow keys to move the snake.
-- Eat the food to grow the snake.
-- Avoid running into the walls or the snake's own body.
-
-## Controls
-
-- `Arrow Keys`: Move the snake
-- `1`: Start the game
-- `2`: Change snake color
-- `0`: Quit the game
-- `Q`: Quit the game when you lose
-- `C`: Play again when you lose
+- Python 3.x
+- Pygame
 
 ## Installation
 
 1. Clone the repository:
-    ```sh
-    git clone https://github.com/yourusername/snake-game.git
+    ```bash
+    git clone https://github.com/yourusername/snake.git
     ```
 2. Navigate to the project directory:
-    ```sh
-    cd snake-game
+    ```bash
+    cd snake
     ```
 3. Install the required dependencies:
-    ```sh
+    ```bash
     pip install pygame
     ```
+
+## How to Play
+
+1. Run the game:
+    ```bash
+    python tests/snake_test.py
+    ```
+2. In the main menu:
+    - Press `1` to start the game.
+    - Press `2` to open settings.
 
 ## Running the Game
 
