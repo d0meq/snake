@@ -26,11 +26,12 @@ This is a simple Snake game implemented using Python and Pygame.
 
 1. Run the game:
     ```bash
-    python tests/snake_test.py
+    python snake.py
     ```
 2. In the main menu:
     - Press `1` to start the game.
     - Press `2` to open settings.
+3. Use arrows to move around and collect as many fruits as you can :)
 
 ## Running the Game
 
