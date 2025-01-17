@@ -10,8 +10,8 @@ snake_size = 10
 # Screen settings
 screen_width = 300
 screen_height = 300
-bg_image = pygame.image.load('background.jpg')
-bg_image2 = pygame.image.load('sky.jpg')
+bg_image = pygame.image.load('./images/background.jpg')
+bg_image2 = pygame.image.load('./images/sky.jpg')
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Snake Game')
 
